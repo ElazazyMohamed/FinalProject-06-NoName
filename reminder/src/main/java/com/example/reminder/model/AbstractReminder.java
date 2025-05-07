@@ -8,7 +8,6 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import java.time.LocalDateTime;
 
 @Document(collection = "reminders")
-@TypeAlias("abstractReminder")
 public abstract class AbstractReminder implements Reminder {
 
     @Id
@@ -19,6 +18,8 @@ public abstract class AbstractReminder implements Reminder {
     private boolean repeated;
     private boolean snoozed;
 
+
+    public AbstractReminder() {}
 
     public AbstractReminder(String userId, String noteId, LocalDateTime time) {
         this.userId = userId;
@@ -65,10 +66,7 @@ public abstract class AbstractReminder implements Reminder {
         return snoozed;
     }
 
-    @Override
-    public void setRepeated(boolean repeated) {
-        this.repeated = repeated;
-    }
+
 
 
 

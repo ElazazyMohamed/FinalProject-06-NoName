@@ -1,10 +1,12 @@
 package com.example.reminder.model;
 
+import org.springframework.data.annotation.TypeAlias;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDateTime;
 
-@Document
+@Document(collection = "reminders")
+@TypeAlias("PRIORITY")
 public class PriorityReminder extends AbstractReminder {
 
     private int priorityLevel; // 1 (low) to 5 (high)

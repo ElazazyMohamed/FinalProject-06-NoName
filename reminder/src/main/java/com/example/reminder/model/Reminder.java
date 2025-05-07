@@ -11,7 +11,7 @@ public interface Reminder {
     boolean isRepeated();
     boolean isSnoozed();
     void setSnoozed(LocalDateTime newTime);
-    void setRepeated(boolean repeated);
+
 
 
 }
