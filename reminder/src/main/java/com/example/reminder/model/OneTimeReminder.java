@@ -1,4 +1,15 @@
 package com.example.reminder.model;
 
-public class OneTimeReminder {
+import org.springframework.data.mongodb.core.mapping.Document;
+
+import java.time.LocalDateTime;
+
+@Document
+public class OneTimeReminder extends  AbstractReminder {
+
+    public OneTimeReminder(String userId, String noteId, LocalDateTime time) {
+        super(userId, noteId, time);
+    }
+
+
 }
