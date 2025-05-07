@@ -66,6 +66,21 @@ public abstract class AbstractReminder implements Reminder {
         return snoozed;
     }
 
+    @Override
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    @Override
+    public void setNoteId(String noteId) {
+        this.noteId = noteId;
+    }
+
+    @Override
+    public void setTime(LocalDateTime time) {
+        this.time = time;
+    }
+
 
 
 

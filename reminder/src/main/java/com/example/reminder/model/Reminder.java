@@ -11,6 +11,10 @@ public interface Reminder {
     boolean isRepeated();
     boolean isSnoozed();
     void setSnoozed(LocalDateTime newTime);
+    void setUserId(String userId);
+    void setNoteId(String noteId);
+    void setTime(LocalDateTime time);
+
 
 
 
