@@ -1,4 +1,32 @@
 package com.example.reminder.observer;
 
-public class NotificationObserver {
+import com.example.reminder.model.Reminder;
+import lombok.RequiredArgsConstructor;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.stereotype.Component;
+
+@Component
+@RequiredArgsConstructor
+public class NotificationObserver implements ReminderObserver {
+    private final RabbitTemplate rabbitTemplate;
+
+    @Override
+    public void onReminderCreated(Reminder reminder) {
+        // Send a "reminder created" event to RabbitMQ
+        rabbitTemplate.convertAndSend(
+                "reminder-exchange",
+                "reminder.created", // Routing key
+                reminder // Event payload
+        );
+    }
+
+    @Override
+    public void onReminderUpdated(Reminder reminder) {
+        // Send a "reminder updated" event (e.g., snoozed)
+        rabbitTemplate.convertAndSend(
+                "reminder-exchange",
+                "reminder.updated",
+                reminder
+        );
+    }
 }
