@@ -6,14 +6,15 @@ import org.springframework.data.annotation.TypeAlias;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 @Document(collection = "reminders")
 public abstract class AbstractReminder implements Reminder {
 
     @Id
-    private String id;
-    private String userId;
-    private String noteId;
+    private UUID id;
+    private Integer userId;
+    private UUID noteId;
     private LocalDateTime time;
     private boolean repeated;
     private boolean snoozed;
@@ -21,9 +22,10 @@ public abstract class AbstractReminder implements Reminder {
 
     public AbstractReminder() {}
 
-    public AbstractReminder(String userId, String noteId, LocalDateTime time) {
+    public AbstractReminder(Integer userId, LocalDateTime time, UUID noteID) {
         this.userId = userId;
-        this.noteId = noteId;
+        this.noteId = noteID;
+        this.id = UUID.randomUUID();
         this.time = time;
         this.repeated = false;
         this.snoozed = false;
@@ -37,17 +39,17 @@ public abstract class AbstractReminder implements Reminder {
     }
 
     @Override
-    public String getId() {
+    public UUID getId() {
         return id;
     }
 
     @Override
-    public String getUserId() {
+    public Integer getUserId() {
         return userId;
     }
 
     @Override
-    public String getNoteId() {
+    public UUID getNoteId() {
         return noteId;
     }
 
@@ -67,12 +69,17 @@ public abstract class AbstractReminder implements Reminder {
     }
 
     @Override
-    public void setUserId(String userId) {
+    public void setUserId(Integer userId) {
         this.userId = userId;
     }
 
     @Override
-    public void setNoteId(String noteId) {
+    public void setId(UUID id) {
+        this.id = id;
+    }
+
+    @Override
+    public void setNoteId(UUID noteId) {
         this.noteId = noteId;
     }
 
