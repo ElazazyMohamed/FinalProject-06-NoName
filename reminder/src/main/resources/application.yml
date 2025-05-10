@@ -1,0 +1,37 @@
+# application.yaml
+
+# Spring Boot Configuration
+spring:
+  # MongoDB Configuration
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/reminder_db # MongoDB connection URI
+      auto-index-creation: true # Optional: Auto-create indexes on startup
+      # MongoDB TypeAlias Configuration (for polymorphism)
+      mapping:
+        type-key: _class
+  # RabbitMQ Configuration
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+    template:
+      exchange: reminder-exchange # Default exchange for sending messages
+    listener:
+      type: simple
+      simple:
+        acknowledge-mode: auto # Auto-acknowledge messages
+  # Jackson Configuration (for LocalDateTime serialization)
+  jackson:
+    serialization:
+      write-dates-as-timestamps: false
+    deserialization:
+      fail-on-unknown-properties: false # Ignore unknown fields in RabbitMQ payloads
+
+# Logging Configuration (optional)
+logging:
+  level:
+    root: INFO
+    org.springframework.amqp: DEBUG # Debug RabbitMQ connections
+    com.example.reminder: DEBUG # Debug your application code
