@@ -2,6 +2,7 @@ package com.example.reminder.listener;
 
 import com.example.reminder.factory.ReminderFactory;
 import com.example.reminder.model.Reminder;
+import com.example.reminder.observer.ReminderSubject;
 import com.example.reminder.repository.ReminderRepository;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -19,6 +20,7 @@ public class ReminderEventListener {
 
     private final ReminderFactory reminderFactory;
     private final ReminderRepository reminderRepository;
+    private final ReminderSubject reminderSubject;
 
     // Listen to "reminder.command.create" messages
     @RabbitListener(queues = "reminder.command.queue")
@@ -31,8 +33,12 @@ public class ReminderEventListener {
         reminder.setNoteId(message.getNoteId());
         reminder.setTime(message.getTime());
 
-        // Save to MongoDB
-        reminderRepository.save(reminder);
+
+
+        Reminder savedReminder = reminderRepository.save(reminder);
+
+        // Notify observers (similar to ReminderService)
+        reminderSubject.notifyReminderCreated(savedReminder);
     }
 
     // Inner class for message deserialization
