@@ -19,7 +19,7 @@ public class ReminderService {
     private final ReminderSubject reminderSubject; // Observer subject
 
 
-    public Reminder createReminder(String type, Integer userId, UUID noteId, LocalDateTime time) {
+    public Reminder createReminder(String type, String userId, String noteId, LocalDateTime time) {
         // Create the reminder
         Reminder reminder = reminderFactory.createReminder(type);
         reminder.setUserId(userId);

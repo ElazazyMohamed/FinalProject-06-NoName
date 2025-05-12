@@ -41,8 +41,8 @@ public class ReminderEventListener {
     @AllArgsConstructor
     public static class CreateReminderMessage {
         private String type;    // e.g., "ONE_TIME"
-        private Integer userId;
-        private UUID noteId;
+        private String userId;
+        private String noteId;
         private LocalDateTime time;
     }
 }

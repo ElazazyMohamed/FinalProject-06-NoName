@@ -5,16 +5,17 @@ import java.util.UUID;
 
 public interface Reminder {
 
-    UUID getId();
-    Integer getUserId();
-    UUID getNoteId();
+
+    String getId();
+    String getUserId();
+    String getNoteId();
     LocalDateTime getTime();
     boolean isRepeated();
     boolean isSnoozed();
     void setSnoozed(LocalDateTime newTime);
-    void setUserId(Integer userId);
-    void setNoteId(UUID noteId);
-    void setId(UUID id);
+    void setUserId(String userId);
+    void setNoteId(String noteId);
+    void setId(String id);
     void setTime(LocalDateTime time);
 
 

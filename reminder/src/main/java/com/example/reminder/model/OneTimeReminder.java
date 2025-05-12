@@ -10,7 +10,7 @@ import java.util.UUID;
 @TypeAlias("ONE_TIME")
 public class OneTimeReminder extends  AbstractReminder {
 
-    public OneTimeReminder(Integer userId, LocalDateTime time, UUID noteID) {
+    public OneTimeReminder(String userId, LocalDateTime time, String noteID) {
         super(userId, time, noteID);
     }
 

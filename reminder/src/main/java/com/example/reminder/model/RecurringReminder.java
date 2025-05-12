@@ -12,7 +12,7 @@ public class RecurringReminder extends AbstractReminder {
 
     private String frequency; // e.g., "daily", "weekly", "monthly"
 
-    public RecurringReminder(Integer userId, LocalDateTime time, UUID noteID, String frequency) {
+    public RecurringReminder(String userId, LocalDateTime time, String noteID, String frequency) {
         super(userId, time, noteID);
         this.frequency = frequency;
     }
