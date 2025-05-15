@@ -1,5 +1,6 @@
 package com.example.reminder.model;
 
+import com.example.reminder.scheduler.RecurrenceRule;
 import org.springframework.data.annotation.TypeAlias;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -9,6 +10,9 @@ import java.util.UUID;
 @Document(collection = "reminders")
 @TypeAlias("RECURRING")
 public class RecurringReminder extends AbstractReminder {
+
+    private RecurrenceRule recurrenceRule;
+    private LocalDateTime lastTriggeredTime;
 
     private String frequency; // e.g., "daily", "weekly", "monthly"
 
@@ -23,5 +27,21 @@ public class RecurringReminder extends AbstractReminder {
 
     public void setFrequency(String frequency) {
         this.frequency = frequency;
+    }
+
+    public RecurrenceRule getRecurrenceRule() {
+        return recurrenceRule;
+    }
+
+    public void setRecurrenceRule(RecurrenceRule recurrenceRule) {
+        this.recurrenceRule = recurrenceRule;
+    }
+
+    public LocalDateTime getLastTriggeredTime() {
+        return lastTriggeredTime;
+    }
+
+    public void setLastTriggeredTime(LocalDateTime lastTriggeredTime) {
+        this.lastTriggeredTime = lastTriggeredTime;
     }
 }
