@@ -29,4 +29,17 @@ public class RabbitMQConfig {
                 .to(reminderExchange())
                 .with("reminder.command.create");
     }
+
+    @Bean
+    public Queue reminderCommandQueue() {
+        return new Queue("reminder.command.queue");
+    }
+
+    @Bean
+    public Binding reminderCommandBinding() {
+        return BindingBuilder.bind(reminderCommandQueue())
+                .to(reminderExchange())
+                .with("reminder.command.*"); // This will match all command messages
+    }
+
 }
