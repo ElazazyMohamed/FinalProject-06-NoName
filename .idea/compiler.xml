@@ -6,6 +6,10 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="logging" />
+        <module name="notification" />
+        <module name="tag" />
+        <module name="reminder" />
       </profile>
       <profile name="Annotation profile for ToDoTask" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
@@ -14,9 +18,12 @@
         <processorPath useClasspath="false">
           <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.38/lombok-1.18.38.jar" />
         </processorPath>
-        <module name="notes" />
+        <module name="user" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="notes" target="23" />
+    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
