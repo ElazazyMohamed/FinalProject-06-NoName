@@ -28,4 +28,21 @@ public class RabbitMQConfig {
                 .to(reminderExchange())
                 .with("reminder.created");
     }
+
+    @Bean
+    public Queue notificationMarkReadQueue() {
+        return new Queue("notification.mark.read.queue");
+    }
+
+    // Queue for listing unread notifications
+    @Bean
+    public Queue notificationListQueue() {
+        return new Queue("notification.list.queue");
+    }
+
+    // Queue for grouping notifications by type
+    @Bean
+    public Queue notificationGroupQueue() {
+        return new Queue("notification.group.queue");
+    }
 }

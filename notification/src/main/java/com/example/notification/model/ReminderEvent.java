@@ -11,9 +11,9 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ReminderEvent {
-    private UUID reminderId;
-    private Integer userId;
-    private UUID noteId;
+    private String reminderId;
+    private String userId;
+    private String noteId;
     private LocalDateTime time;
     private String notificationType; // e.g., "EMAIL", "SMS", "IN_APP"
 }
