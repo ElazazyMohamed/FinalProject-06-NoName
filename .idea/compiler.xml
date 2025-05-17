@@ -6,12 +6,6 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="notification" />
-        <module name="logging" />
-        <module name="notes" />
-        <module name="tag" />
-        <module name="reminder" />
-        <module name="user" />
       </profile>
     </annotationProcessing>
   </component>
