@@ -1,10 +1,29 @@
 server:
-  port: 8085
+  port: 8086
+
+spring:
+  profiles:
+    active: local
+  application:
+    name: user-service
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+  instance:
+    prefer-ip-address: true
+    hostname: localhost
+
+---
 
 # local Profile
 spring:
-  application:
-    name: UserMicroService
   datasource:
     url: jdbc:postgresql://localhost:5432/user
     username: noname
@@ -25,7 +44,6 @@ spring:
       port: 6379
   cache:
     type: redis
-
 
 ---
 
