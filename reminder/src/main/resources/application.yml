@@ -1,0 +1,74 @@
+server:
+  port: 8083
+
+spring:
+  profiles:
+    active: local
+
+---
+# Local Profile
+spring:
+  config:
+    activate:
+      on-profile: local
+  application:
+    name: ReminderMicroService
+  data:
+    mongodb:
+      uri: mongodb://root:example@localhost:27017/reminder?authSource=admin
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+    template:
+      exchange: reminder-exchange
+    listener:
+      type: simple
+      simple:
+        acknowledge-mode: auto
+  jackson:
+    serialization:
+      write-dates-as-timestamps: false
+    deserialization:
+      fail-on-unknown-properties: false
+  logging:
+    level:
+      root: INFO
+      org.springframework.amqp: DEBUG
+      org.springframework.data.mongodb: DEBUG
+      com.example.reminder: DEBUG
+
+---
+# Docker Profile
+spring:
+  config:
+    activate:
+      on-profile: docker
+  application:
+    name: ReminderMicroService
+  data:
+    mongodb:
+      uri: mongodb://root:example@mongodb:27017/reminder?authSource=admin
+  rabbitmq:
+    host: rabbitmq # Use RabbitMQ container name
+    port: 5672
+    username: guest
+    password: guest
+    template:
+      exchange: reminder-exchange
+    listener:
+      type: simple
+      simple:
+        acknowledge-mode: auto
+  jackson:
+    serialization:
+      write-dates-as-timestamps: false
+    deserialization:
+      fail-on-unknown-properties: false
+  logging:
+    level:
+      root: INFO
+      org.springframework.amqp: DEBUG
+      org.springframework.data.mongodb: DEBUG
+      com.example.reminder: DEBUG

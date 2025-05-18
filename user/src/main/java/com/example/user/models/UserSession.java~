@@ -1,0 +1,19 @@
+package com.example.user.models;
+
+import lombok.AllArgsConstructor;
+
+import java.io.Serializable;
+
+@AllArgsConstructor
+public class UserSession implements Serializable {
+    private String token;
+    private UserDTO userDTO;
+
+    public String getToken() {
+        return token;
+    }
+
+    public UserDTO getUserDTO() {
+        return userDTO;
+    }
+}
