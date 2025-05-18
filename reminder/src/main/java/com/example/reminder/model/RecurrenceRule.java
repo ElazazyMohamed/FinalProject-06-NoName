@@ -1,4 +1,4 @@
-package com.example.reminder.scheduler;
+package com.example.reminder.model;
 
 public enum RecurrenceRule {
     DAILY,

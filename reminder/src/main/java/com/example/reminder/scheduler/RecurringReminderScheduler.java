@@ -1,6 +1,7 @@
 package com.example.reminder.scheduler;
 
 import com.example.reminder.factory.ReminderFactory;
+import com.example.reminder.model.RecurrenceRule;
 import com.example.reminder.model.RecurringReminder;
 import com.example.reminder.model.Reminder;
 import com.example.reminder.repository.ReminderRepository;
@@ -8,16 +9,23 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
-
 import java.time.LocalDateTime;
 import java.util.List;
 
 @Component
-@RequiredArgsConstructor
-@Slf4j
+
 public class RecurringReminderScheduler {
+    private static final org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger(RecurringReminderScheduler.class);
+
     private final ReminderRepository reminderRepository;
     private final ReminderFactory reminderFactory;
+
+
+    public RecurringReminderScheduler(ReminderRepository reminderRepository,
+                                      ReminderFactory reminderFactory) {
+        this.reminderRepository = reminderRepository;
+        this.reminderFactory = reminderFactory;
+    }
 
     // Run every 1 hour (adjust interval as needed)
     @Scheduled(fixedRate = 3600 * 1000)
