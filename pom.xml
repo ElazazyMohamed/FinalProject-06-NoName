@@ -25,7 +25,8 @@
 		<module>logging</module>
 		<module>reminder</module>
         <module>common</module>
-    </modules>
+		<module>gateway</module>
+	</modules>
 
 	<properties>
 		<java.version>23</java.version>
@@ -43,7 +44,7 @@
 			<dependency>
 				<groupId>org.springframework.cloud</groupId>
 				<artifactId>spring-cloud-dependencies</artifactId>
-				<version>2023.0.1</version> <!-- Use the appropriate version -->
+				<version>2024.0.1</version> <!-- updated version -->
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
