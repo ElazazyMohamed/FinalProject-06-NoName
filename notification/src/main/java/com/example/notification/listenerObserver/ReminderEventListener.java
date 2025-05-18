@@ -15,10 +15,13 @@ public class ReminderEventListener {
     private final UserServiceClient userServiceClient; // Mandatory Feign client
 
     @RabbitListener(queues = "notification.queue")
-    public void handleReminderCreated(ReminderEvent event) {
-        // Fetch user data via OpenFeign (sync)
+    public void handleReminderEvent(ReminderEvent event) {
+        // Fetch user data via OpenFeign
         UserResponse user = userServiceClient.getUser(String.valueOf(event.getUserId()));
-        // Send notification using strategy
+
+        // Send notification with proper context based on event type
+        // You'll need to modify ReminderEvent to include an event type field
+        // or modify NotificationService to handle different event types
         notificationService.sendNotification(event, user);
     }
 }

@@ -45,4 +45,25 @@ public class RabbitMQConfig {
     public Queue notificationGroupQueue() {
         return new Queue("notification.group.queue");
     }
+
+    // Bind queue to exchange for "reminder.updated" events
+    @Bean
+    public Binding reminderUpdatedBinding() {
+        return BindingBuilder.bind(notificationQueue())
+                .to(reminderExchange())
+                .with("reminder.updated");
+    }
+
+    // Bind queue to exchange for "reminder.deleted" events
+    @Bean
+    public Binding reminderDeletedBinding() {
+        return BindingBuilder.bind(notificationQueue())
+                .to(reminderExchange())
+                .with("reminder.deleted");
+    }
+
+    @Bean
+    public Queue notificationQueryQueue() {
+        return new Queue("notification.query.queue");
+    }
 }
