@@ -1,5 +1,6 @@
 package com.example.user.models;
 
+import com.example.common.models.Status;
 import jakarta.persistence.*;
 import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;

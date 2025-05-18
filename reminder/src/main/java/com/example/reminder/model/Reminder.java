@@ -1,11 +1,8 @@
 package com.example.reminder.model;
 
 import java.time.LocalDateTime;
-import java.util.UUID;
 
 public interface Reminder {
-
-
     String getId();
     String getUserId();
     String getNoteId();
@@ -17,8 +14,4 @@ public interface Reminder {
     void setNoteId(String noteId);
     void setId(String id);
     void setTime(LocalDateTime time);
-
-
-
-
 }

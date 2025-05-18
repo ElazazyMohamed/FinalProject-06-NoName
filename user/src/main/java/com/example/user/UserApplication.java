@@ -2,10 +2,12 @@ package com.example.user;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.cache.annotation.EnableCaching;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Import;
 
 @SpringBootApplication
-@EnableCaching
+@Import(com.example.common.configs.RedisCacheConfig.class)
+@ComponentScan(basePackages = {"com.example.user", "com.example.common"})
 public class UserApplication {
 
     public static void main(String[] args) {

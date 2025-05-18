@@ -1,7 +1,7 @@
 package com.example.notification.listenerObserver;
 
-import com.example.notification.dto.UserResponse;
-import com.example.notification.feign.UserServiceClient;
+import com.example.common.models.UserDTO;
+import com.example.notification.clients.UserClient;
 import com.example.notification.model.ReminderEvent;
 import com.example.notification.service.NotificationService;
 import lombok.RequiredArgsConstructor;
@@ -12,13 +12,13 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class ReminderEventListener {
     private final NotificationService notificationService;
-    private final UserServiceClient userServiceClient; // Mandatory Feign client
+    private final UserClient userClient; // Mandatory Feign client
 
     @RabbitListener(queues = "notification.queue")
     public void handleReminderCreated(ReminderEvent event) {
         // Fetch user data via OpenFeign (sync)
-        UserResponse user = userServiceClient.getUser(String.valueOf(event.getUserId()));
+        UserDTO user = userClient.getUserById(event.getUserId());
         // Send notification using strategy
-        notificationService.sendNotification(event, user);
+        notificationService.sendNotification(event);
     }
 }

@@ -1,5 +1,7 @@
 package com.example.user.models;
 
+import com.example.common.models.Status;
+import com.example.common.models.Type;
 import com.example.user.security.PasswordEncoder;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -9,6 +11,7 @@ import org.springframework.stereotype.Component;
 @AllArgsConstructor
 public class UserFactory {
     private final PasswordEncoder passwordEncoder;
+
 
     public BaseUser createUser(
             Type type,

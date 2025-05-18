@@ -28,7 +28,7 @@ public class Note {
     private Instant updatedAt;
     private Status status;
 
-    public Note(Builder builder) {
+   public Note(Builder builder) {
         this.title = builder.getTitle();
         this.content = builder.getContent();
         this.userId = builder.getUserId();
@@ -36,5 +36,5 @@ public class Note {
         this.createdAt = builder.getCreatedAt();
         this.updatedAt = builder.getUpdatedAt();
         this.status = builder.getStatus();
-    }
+   }
 }

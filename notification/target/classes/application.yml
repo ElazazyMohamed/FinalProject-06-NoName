@@ -1,0 +1,18 @@
+spring:
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/notification_db
+  jackson:
+    serialization:
+      write-dates-as-timestamps: false
+
+# Mandatory Feign client configuration
+user:
+  service:
+    url: http://localhost:8081
+    # User Microservice URL

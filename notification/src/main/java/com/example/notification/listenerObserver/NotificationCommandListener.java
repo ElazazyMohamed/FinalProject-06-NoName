@@ -16,7 +16,7 @@ public class NotificationCommandListener {
     public void handleMarkAsRead(String notificationId) {
         Notification notification = notificationRepository.findById(notificationId)
                 .orElseThrow(() -> new RuntimeException("Notification not found"));
-        notification.setRead(true);
+        notification.setIsRead(true);
         notificationRepository.save(notification);
     }
 }

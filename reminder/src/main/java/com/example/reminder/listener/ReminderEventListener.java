@@ -4,10 +4,7 @@ import com.example.reminder.factory.ReminderFactory;
 import com.example.reminder.model.Reminder;
 import com.example.reminder.observer.ReminderSubject;
 import com.example.reminder.repository.ReminderRepository;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.stereotype.Component;
@@ -45,6 +42,8 @@ public class ReminderEventListener {
     @Data
     @NoArgsConstructor
     @AllArgsConstructor
+    @Getter
+    @Setter
     public static class CreateReminderMessage {
         private String type;    // e.g., "ONE_TIME"
         private String userId;
