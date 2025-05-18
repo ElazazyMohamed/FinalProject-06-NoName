@@ -1,0 +1,46 @@
+package com.example.user.models;
+
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import org.springframework.scheduling.annotation.Scheduled;
+
+import java.time.Instant;
+import java.util.concurrent.ConcurrentHashMap;
+
+@Getter
+@NoArgsConstructor
+public class CacheSession {
+    private final ConcurrentHashMap<String, UserSession> cache = new ConcurrentHashMap<>();
+
+    // Cache a new session
+    public void cacheSession(String sessionId, UserSession session) {
+        cache.put(sessionId, session);
+    }
+
+    // Retrieve a session
+    public UserSession getSession(String sessionId) {
+        UserSession session = cache.get(sessionId);
+        if (session != null && session.isExpired()) {
+            cache.remove(sessionId);
+            return null;
+        }
+        return session;
+    }
+
+    // Remove a session
+    public void removeSession(String sessionId) {
+        cache.remove(sessionId);
+    }
+
+    // Check session existence
+    public boolean sessionExists(String sessionId) {
+        UserSession session = getSession(sessionId);
+        return session != null;
+    }
+
+    // Evict expired sessions (runs every minute)
+    @Scheduled(fixedRate = 60000)
+    public void evictExpiredSessions() {
+        cache.entrySet().removeIf(entry -> entry.getValue().isExpired());
+    }
+}

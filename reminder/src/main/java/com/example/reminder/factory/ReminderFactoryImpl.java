@@ -6,13 +6,14 @@ import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.ClassPathScanningCandidateComponentProvider;
 import org.springframework.core.type.filter.AssignableTypeFilter;
 import org.springframework.data.annotation.TypeAlias;
-
+import org.springframework.stereotype.Component;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Supplier;
 
+@Component
 public class ReminderFactoryImpl implements ReminderFactory {
 
     private final Map<String, Supplier<Reminder>> registry = new HashMap<>();

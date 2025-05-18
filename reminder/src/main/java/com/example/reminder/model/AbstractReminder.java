@@ -1,20 +1,25 @@
 package com.example.reminder.model;
 
 
+import lombok.Getter;
+import lombok.Setter;
+import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.TypeAlias;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.bson.types.ObjectId;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
-
+@Getter
+@Setter
 @Document(collection = "reminders")
 public abstract class AbstractReminder implements Reminder {
 
     @Id
-    private UUID id;
-    private Integer userId;
-    private UUID noteId;
+    private ObjectId id;
+    private String userId;
+    private String noteId;
     private LocalDateTime time;
     private boolean repeated;
     private boolean snoozed;
@@ -22,10 +27,10 @@ public abstract class AbstractReminder implements Reminder {
 
     public AbstractReminder() {}
 
-    public AbstractReminder(Integer userId, LocalDateTime time, UUID noteID) {
+    public AbstractReminder(String userId, LocalDateTime time, String noteID) {
         this.userId = userId;
         this.noteId = noteID;
-        this.id = UUID.randomUUID();
+        this.id = new ObjectId();
         this.time = time;
         this.repeated = false;
         this.snoozed = false;
@@ -39,17 +44,17 @@ public abstract class AbstractReminder implements Reminder {
     }
 
     @Override
-    public UUID getId() {
-        return id;
+    public String getId() {
+        return id != null ? id.toString() : null;
     }
 
     @Override
-    public Integer getUserId() {
+    public String getUserId() {
         return userId;
     }
 
     @Override
-    public UUID getNoteId() {
+    public String getNoteId() {
         return noteId;
     }
 
@@ -69,17 +74,17 @@ public abstract class AbstractReminder implements Reminder {
     }
 
     @Override
-    public void setUserId(Integer userId) {
+    public void setUserId(String userId) {
         this.userId = userId;
     }
 
     @Override
-    public void setId(UUID id) {
-        this.id = id;
+    public void setId(String id) {
+        this.id = id != null ? new ObjectId(id) : null;
     }
 
     @Override
-    public void setNoteId(UUID noteId) {
+    public void setNoteId(String noteId) {
         this.noteId = noteId;
     }
 
