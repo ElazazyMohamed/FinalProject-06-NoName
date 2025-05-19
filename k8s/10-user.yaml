@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: user
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: user
+  template:
+    metadata:
+      labels:
+        app: user
+    spec:
+      containers:
+      - name: user
+        image: user:latest
+        ports:
+        - containerPort: 8085
+        env:
+        - name: SPRING_DATASOURCE_URL
+          value: jdbc:postgresql://postgres:5432/user
+        - name: SPRING_DATASOURCE_USERNAME
+          value: noname
+        - name: SPRING_DATASOURCE_PASSWORD
+          value: password
+        - name: SPRING_DATA_REDIS_HOST
+          value: redis
+        - name: SPRING_DATA_REDIS_PORT
+          value: "6379"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: user
+spec:
+  type: NodePort
+  ports:
+    - port: 8085
+      targetPort: 8085
+      nodePort: 30085
+  selector:
+    app: user 

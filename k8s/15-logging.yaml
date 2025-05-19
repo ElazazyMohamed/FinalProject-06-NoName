@@ -1,0 +1,53 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: logging
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: logging
+  template:
+    metadata:
+      labels:
+        app: logging
+    spec:
+      containers:
+      - name: logging
+        image: logging:latest
+        ports:
+        - containerPort: 8081
+        env:
+        - name: SPRING_DATA_MONGODB_HOST
+          value: mongodb
+        - name: SPRING_DATA_MONGODB_PORT
+          value: "27017"
+        - name: SPRING_DATA_MONGODB_DATABASE
+          value: logs
+        - name: SPRING_DATA_MONGODB_AUTHENTICATION-DATABASE
+          value: admin
+        - name: SPRING_DATA_MONGODB_USERNAME
+          value: mongodb
+        - name: SPRING_DATA_MONGODB_PASSWORD
+          value: mongodb
+        - name: SPRING_RABBITMQ_HOST
+          value: rabbitmq
+        - name: SPRING_RABBITMQ_PORT
+          value: "5672"
+        - name: SPRING_RABBITMQ_USERNAME
+          value: guest
+        - name: SPRING_RABBITMQ_PASSWORD
+          value: guest
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: logging
+spec:
+  type: NodePort
+  ports:
+    - port: 8081
+      targetPort: 8081
+      nodePort: 30091
+  selector:
+    app: logging 
