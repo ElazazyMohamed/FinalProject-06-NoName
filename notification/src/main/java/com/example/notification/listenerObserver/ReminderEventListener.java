@@ -14,11 +14,6 @@ public class ReminderEventListener {
     private final NotificationService notificationService;
     private final UserClient userClient; // Mandatory Feign client
 
-    @RabbitListener(queues = "notification.queue")
-    public void handleReminderCreated(ReminderEvent event) {
-        // Fetch user data via OpenFeign (sync)
-        UserDTO user = userClient.getUserById(event.getUserId());
-        // Send notification using strategy
-        notificationService.sendNotification(event);
+   
     }
 }

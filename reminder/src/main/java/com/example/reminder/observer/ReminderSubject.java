@@ -23,4 +23,9 @@ public class ReminderSubject {
     public void notifyReminderUpdated(Reminder reminder) {
         observers.forEach(observer -> observer.onReminderUpdated(reminder));
     }
+
+    // In reminder/src/main/java/com/example/reminder/observer/ReminderSubject.java
+    public void notifyReminderDeleted(Reminder reminder) {
+        observers.forEach(observer -> observer.onReminderDeleted(reminder));
+    }
 }
