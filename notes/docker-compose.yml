@@ -1,19 +1,19 @@
 services:
-#  app:
-#    build: .
-#    container_name: notesMicroService
-#    restart: always
-#    depends_on:
-#      - mongo
-#      - mongo-express
-#    ports:
-#      - "8081:8081"
-#    environment:
-#      SPRING_PROFILES_ACTIVE: docker  # Activate the docker profile
+  app:
+    build: .
+    container_name: notes-service
+    restart: always
+    depends_on:
+      - mongodb-notes
+      - mongo-express-notes
+    ports:
+      - "8081:8081"
+    environment:
+      SPRING_PROFILES_ACTIVE: docker  # Activate the docker profile
 
-  mongodb:
+  mongodb-notes:
     image: mongo:latest
-    container_name: mongodb
+    container_name: mongodb-notes
     restart: always
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
@@ -23,18 +23,18 @@ services:
     volumes:
       - db:/data/db
 
-  mongo-express:
+  mongo-express-notes:
     image: mongo-express:latest
-    container_name: mongo-express
+    container_name: mongo-express-notes
     restart: always
     ports:
       - "9000:9000"
     depends_on:
-      - mongodb
+      - mongodb-notes
     environment:
       ME_CONFIG_MONGODB_ADMINUSERNAME: root
       ME_CONFIG_MONGODB_ADMINPASSWORD: example
-      ME_CONFIG_MONGODB_URL: mongodb://root:example@mongodb:27017/notes?authSource=admin
+      ME_CONFIG_MONGODB_URL: mongodb://root:example@mongodb-notes:27017/notes?authSource=admin
       ME_CONFIG_BASICAUTH: false
 
 volumes:

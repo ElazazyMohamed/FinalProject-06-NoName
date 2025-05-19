@@ -1,9 +1,11 @@
 server:
-  port: 8081
+  port: 8080
 
 spring:
   application:
     name: logging-service
+  main:
+    web-application-type: reactive
   data:
     mongodb:
       host: localhost
@@ -20,6 +22,7 @@ spring:
 
 eureka:
   client:
+    enabled: false
     service-url:
       defaultZone: http://localhost:8761/eureka
   instance:
