@@ -39,7 +39,7 @@ spring:
       on-profile: local
   data:
     mongodb:
-      uri: mongodb://root:example@localhost:27017/reminder?authSource=admin
+      url: mongodb://root:example@localhost:27017/reminder?authSource=admin
 
 ---
 
@@ -50,4 +50,4 @@ spring:
       on-profile: docker
   data:
     mongodb:
-      uri: mongodb://root:example@mongodb:27017/reminder?authSource=admin
+      url: mongodb://root:example@mongodb:27017/reminder?authSource=admin
