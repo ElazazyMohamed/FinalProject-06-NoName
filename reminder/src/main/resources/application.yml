@@ -1,37 +1,53 @@
-# application.yaml
+server:
+  port: 8084
 
-# Spring Boot Configuration
 spring:
-  # MongoDB Configuration
-  data:
-    mongodb:
-      uri: mongodb://localhost:27017/reminder_db # MongoDB connection URI
-      auto-index-creation: true # Optional: Auto-create indexes on startup
-      # MongoDB TypeAlias Configuration (for polymorphism)
-      mapping:
-        type-key: _class
-  # RabbitMQ Configuration
+  profiles:
+    active: local
+  application:
+    name: reminder-service
   rabbitmq:
     host: localhost
     port: 5672
     username: guest
     password: guest
-    template:
-      exchange: reminder-exchange # Default exchange for sending messages
-    listener:
-      type: simple
-      simple:
-        acknowledge-mode: auto # Auto-acknowledge messages
-  # Jackson Configuration (for LocalDateTime serialization)
   jackson:
     serialization:
       write-dates-as-timestamps: false
     deserialization:
-      fail-on-unknown-properties: false # Ignore unknown fields in RabbitMQ payloads
+      fail-on-unknown-properties: false
+  logging:
+    level:
+      root: INFO
+      org.springframework.amqp: DEBUG
+      org.springframework.data.mongodb: DEBUG
+      com.example.reminder: DEBUG
 
-# Logging Configuration (optional)
-logging:
-  level:
-    root: INFO
-    org.springframework.amqp: DEBUG # Debug RabbitMQ connections
-    com.example.reminder: DEBUG # Debug your application code
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+  instance:
+    prefer-ip-address: true
+    hostname: localhost
+
+---
+# Local Profile
+spring:
+  config:
+    activate:
+      on-profile: local
+  data:
+    mongodb:
+      uri: mongodb://root:example@localhost:27017/reminder?authSource=admin
+
+---
+
+# Docker Profile
+spring:
+  config:
+    activate:
+      on-profile: docker
+  data:
+    mongodb:
+      uri: mongodb://root:example@mongodb:27017/reminder?authSource=admin

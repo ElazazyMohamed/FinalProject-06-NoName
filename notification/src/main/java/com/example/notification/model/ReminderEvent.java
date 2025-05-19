@@ -12,7 +12,7 @@ import java.util.UUID;
 @AllArgsConstructor
 public class ReminderEvent {
     private String reminderId;
-    private String userId;
+    private Integer userId;
     private String noteId;
     private LocalDateTime time;
     private String operationType;    // e.g., "CREATED", "UPDATED", "DELETED"

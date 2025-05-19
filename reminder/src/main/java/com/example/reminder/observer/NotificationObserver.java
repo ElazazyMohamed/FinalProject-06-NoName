@@ -7,9 +7,13 @@ import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.stereotype.Component;
 
 @Component
-@RequiredArgsConstructor
 public class NotificationObserver implements ReminderObserver {
     private final RabbitTemplate rabbitTemplate;
+
+
+    public NotificationObserver(RabbitTemplate rabbitTemplate) {
+        this.rabbitTemplate = rabbitTemplate;
+    }
 
     @Override
     public void onReminderCreated(Reminder reminder) {

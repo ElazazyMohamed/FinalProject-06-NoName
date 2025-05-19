@@ -1,0 +1,41 @@
+server:
+  port: 8082
+
+spring:
+  profiles:
+    active: local
+  application:
+    name: notes-service
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+  instance:
+    prefer-ip-address: true
+    hostname: localhost
+
+---
+
+# local Profile
+spring:
+  config:
+    activate:
+      on-profile: local
+  data:
+    mongodb:
+      uri: mongodb://root:example@localhost:27017/notes?authSource=admin
+      database: notes
+      port: 27017
+
+---
+
+# Docker Profile
+spring:
+  config:
+    activate:
+      on-profile: docker
+  data:
+    mongodb:
+      uri: mongodb://root:example@mongodb:27017/notes?authSource=admin
+      database:notes

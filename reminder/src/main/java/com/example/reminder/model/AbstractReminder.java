@@ -1,6 +1,8 @@
 package com.example.reminder.model;
 
 
+import lombok.Getter;
+import lombok.Setter;
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.TypeAlias;
@@ -9,7 +11,8 @@ import org.bson.types.ObjectId;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
-
+@Getter
+@Setter
 @Document(collection = "reminders")
 public abstract class AbstractReminder implements Reminder {
 
